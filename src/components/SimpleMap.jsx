@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import geoData from "../data/geo.json"
 import GoogleMapReact, {
 	Marker,
 	Map,
@@ -11,6 +12,14 @@ require("dotenv").config();
 
 let countriesNames = [];
 let allCountries = [];
+
+
+// geoData imported from JSOn file in data. Now have reference to centroid coordinates for each country as needed
+for (const items of geoData.features) {
+	console.log(items.properties.name)
+	console.log(items.properties.Longitude)
+	console.log(items.properties.Latitude)
+}
 
 // We need to convert the counties to lat and lon with the geocode api
 
