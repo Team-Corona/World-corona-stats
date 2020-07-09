@@ -2,7 +2,7 @@ const express = require("express");
 
 const port = process.env.PORT || 8080;
 const app = express();
-
+require("dotenv").config();
 app.listen(port, () => console.log(`Listening on Port ${port}`));
 
 // api here
@@ -14,7 +14,7 @@ const coronaData = axios({
 	headers: {
 		"content-type": "application/octet-stream",
 		"x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
-		"x-rapidapi-key": CORONA_DATA_APIKEY,
+		"x-rapidapi-key": process.env.CORONA_DATA_APIKEY,
 	},
 })
 	.then((response) => {
