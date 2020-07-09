@@ -6,7 +6,7 @@ Try our app [here](https://world-corona-stats.herokuapp.com).
 ## Setup instructions
 
 ### 1. clone this repo
-```git clone https://github.com/ryukikikie/World-corona-stats```
+```git clone https://github.com/Team-Corona/World-corona-stats```
 
 ### 2. install packages
 ```yarn```
