@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
 import "../style/news.css";
 require("dotenv").config();
-
+axios.defaults.withCredentials = true;
 export default function News(props) {
 	const [coronaNews, setCoronaNews] = useState([]);
 	useEffect(() => {
-		(async function() {
-			const newsData = await axios({
+		const fetchData = async () => {
+			const res = await axios({
 				method: "GET",
 				url:
 					"https://microsoft-azure-bing-news-search-v1.p.rapidapi.com/search",
@@ -19,23 +17,22 @@ export default function News(props) {
 					"content-type": "application/octet-stream",
 					"x-rapidapi-host":
 						"microsoft-azure-bing-news-search-v1.p.rapidapi.com",
-					"x-rapidapi-key": process.env.REACT_APP_API_KEY_NEWS
+					"x-rapidapi-key":
+						"287a779037mshc14498a1ac0ebc0p1b8a7fjsn8e058dbd8350",
+					useQueryString: true,
 				},
 				params: {
-					q: "corona virus",
-					mkt: `${props.language}`
-				}
-			})
-				.then((response) => {
-					console.log(response);
-					//push ones with image to array
-					setCoronaNews(response.data.value.filter((obj) => obj.image));
-				})
-				.catch((error) => {
-					console.log(error);
-				});
-		})();
-	}, [props.language]);
+					count: 10,
+					q: "Coronavirus",
+					mkt: "en-AU",
+				},
+			});
+			const data = res.data;
+			console.log(data);
+			setCoronaNews(data.value);
+		};
+		fetchData();
+	}, []);
 	return (
 		<div className="corona-news">
 			{coronaNews.map((news, idx) => {
