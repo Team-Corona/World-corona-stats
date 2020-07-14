@@ -3,10 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import axios from "axios";
 import "../style/news.css";
-require("dotenv").config();
-axios.defaults.withCredentials = true;
 export default function News(props) {
 	const [coronaNews, setCoronaNews] = useState([]);
+	const market = "en-AU";
 	useEffect(() => {
 		const fetchData = async () => {
 			const res = await axios({
@@ -17,18 +16,16 @@ export default function News(props) {
 					"content-type": "application/octet-stream",
 					"x-rapidapi-host":
 						"microsoft-azure-bing-news-search-v1.p.rapidapi.com",
-					"x-rapidapi-key":
-						"287a779037mshc14498a1ac0ebc0p1b8a7fjsn8e058dbd8350",
+					"x-rapidapi-key": process.env.REACT_APP_BING_NEWS,
 					useQueryString: true,
 				},
 				params: {
 					count: 10,
 					q: "Coronavirus",
-					mkt: "en-AU",
+					mkt: market,
 				},
 			});
 			const data = res.data;
-			console.log(data);
 			setCoronaNews(data.value);
 		};
 		fetchData();
