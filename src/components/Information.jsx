@@ -2,7 +2,6 @@ import React from "react";
 import { Card } from "react-bootstrap";
 
 export default function Information({ country_name, cases, deaths }) {
-	console.log(deaths);
 	return (
 		<>
 			<br />

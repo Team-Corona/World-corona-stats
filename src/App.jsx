@@ -48,7 +48,6 @@ export default function App() {
 						</Navbar>
 						<div className="scrollbar">
 							{coronaData.map((stat, idx) => {
-								console.log(stat);
 								return (
 									<Information
 										key={idx}
